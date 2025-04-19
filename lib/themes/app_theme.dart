@@ -8,6 +8,17 @@ class AppTheme {
   static const Color blackColor = Colors.black87;
   static const Color lightGreyColor = Colors.black54;
   static const Color successColor = Colors.green;
+  static const Color textSecondary = Colors.grey;
+  
+  // Spacing
+  static const double spacingXs = 4.0;
+  static const double spacingSm = 8.0;
+  static const double spacingMd = 16.0;
+  static const double spacingLg = 24.0;
+  static const double spacingXl = 32.0;
+  
+  // Border Radius
+  static const double borderRadius = 8.0;
   
   // Text Styles
   static const TextStyle appBarTitleStyle = TextStyle(
@@ -85,6 +96,24 @@ class AppTheme {
   static const TextStyle bodyTextStyle = TextStyle(
     fontSize: 16,
     color: greyColor,
+  );
+
+  // New Text Styles
+  static const TextStyle heading1 = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: blackColor,
+  );
+
+  static const TextStyle bodyText = TextStyle(
+    fontSize: 16,
+    color: blackColor,
+  );
+
+  static const TextStyle buttonText = TextStyle(
+    fontSize: 16,
+    fontWeight: FontWeight.bold,
+    color: whiteColor,
   );
 
   // Container Styles

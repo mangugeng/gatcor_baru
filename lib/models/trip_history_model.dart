@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'order_model.dart';
-import 'service_model.dart';
 
 part 'trip_history_model.g.dart';
 

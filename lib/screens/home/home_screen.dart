@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../models/service_model.dart';
+import '../../models/trip_history_model.dart';
+import '../../themes/app_theme.dart';
 import '../promo/promo_detail_screen.dart';
-import '../service/service_detail_screen.dart';
 import '../profile/profile_screen.dart';
-import '../order/order_screen.dart';
 import '../order/initial_order_screen.dart';
+import '../trip_history_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -56,18 +57,21 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gatcor'),
-        backgroundColor: Colors.blue,
+        title: Text(
+          'Gatcor',
+          style: AppTheme.appBarTitleStyle,
+        ),
+        backgroundColor: AppTheme.primaryColor,
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications_outlined),
             onPressed: () {
               // TODO: Show notifications
             },
           ),
           IconButton(
-            icon: Icon(Icons.person),
+            icon: const Icon(Icons.person_outline),
             onPressed: () {
               Navigator.push(
                 context,
@@ -87,29 +91,29 @@ class _HomeScreenState extends State<HomeScreen> {
             _selectedIndex = index;
           });
         },
-        backgroundColor: Colors.white,
+        backgroundColor: AppTheme.whiteColor,
         elevation: 8,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey.shade600,
+        selectedItemColor: AppTheme.primaryColor,
+        unselectedItemColor: AppTheme.greyColor,
         type: BottomNavigationBarType.fixed,
-        selectedLabelStyle: const TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
+        selectedLabelStyle: AppTheme.bodyText.copyWith(
+          fontWeight: FontWeight.bold,
         ),
-        unselectedLabelStyle: const TextStyle(
-          fontSize: 12,
-        ),
+        unselectedLabelStyle: AppTheme.bodyText,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home_outlined),
+            activeIcon: Icon(Icons.home),
             label: 'Beranda',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.history),
+            icon: Icon(Icons.history_outlined),
+            activeIcon: Icon(Icons.history),
             label: 'Riwayat',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
+            icon: Icon(Icons.person_outline),
+            activeIcon: Icon(Icons.person),
             label: 'Profil',
           ),
         ],
@@ -125,18 +129,22 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Search Bar
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.all(AppTheme.spacingLg),
               child: TextField(
+                style: AppTheme.bodyText,
                 decoration: InputDecoration(
                   hintText: 'Cari layanan...',
-                  prefixIcon: Icon(Icons.search),
+                  hintStyle: AppTheme.hintTextStyle,
+                  prefixIcon: const Icon(Icons.search),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(AppTheme.borderRadius),
                   ),
                   filled: true,
                   fillColor: Colors.grey[100],
                   isDense: true,
-                  contentPadding: EdgeInsets.symmetric(vertical: 12),
+                  contentPadding: const EdgeInsets.symmetric(
+                    vertical: AppTheme.spacingMd,
+                  ),
                 ),
               ),
             ),
@@ -144,11 +152,11 @@ class _HomeScreenState extends State<HomeScreen> {
             // Promo Banner
             Container(
               height: 140,
-              margin: EdgeInsets.symmetric(horizontal: 16),
+              margin: EdgeInsets.symmetric(horizontal: AppTheme.spacingLg),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(AppTheme.borderRadius),
                 gradient: LinearGradient(
-                  colors: [Colors.blue, Colors.lightBlue],
+                  colors: [AppTheme.primaryColor, Colors.lightBlue],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
@@ -162,50 +170,55 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Icon(
                       Icons.local_offer,
                       size: 100,
-                      color: Colors.white.withOpacity(0.2),
+                      color: AppTheme.whiteColor.withOpacity(0.2),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(AppTheme.spacingMd),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           'Promo Spesial!',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                          style: AppTheme.heading1.copyWith(
+                            color: AppTheme.whiteColor,
                           ),
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: AppTheme.spacingXs),
                         Text(
                           'Dapatkan diskon 50% untuk pesanan pertama',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 12,
+                          style: AppTheme.bodyText.copyWith(
+                            color: AppTheme.whiteColor,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: AppTheme.spacingMd),
                         ElevatedButton(
                           onPressed: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PromoDetailScreen(),
+                                builder: (context) => const PromoDetailScreen(),
                               ),
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.blue,
-                            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                            minimumSize: Size(0, 28),
+                            backgroundColor: AppTheme.whiteColor,
+                            foregroundColor: AppTheme.primaryColor,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: AppTheme.spacingMd,
+                              vertical: AppTheme.spacingSm,
+                            ),
+                            minimumSize: const Size(0, 28),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(AppTheme.borderRadius),
+                            ),
                           ),
                           child: Text(
                             'Lihat Detail',
-                            style: TextStyle(fontSize: 12),
+                            style: AppTheme.buttonText.copyWith(
+                              color: AppTheme.primaryColor,
+                            ),
                           ),
                         ),
                       ],
@@ -215,17 +228,21 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
             
-            SizedBox(height: 16),
+            const SizedBox(height: AppTheme.spacingLg),
             
             // Services Grid
             GridView.builder(
               shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              padding: EdgeInsets.only(left: 16, right: 16, bottom: 80),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.only(
+                left: AppTheme.spacingLg,
+                right: AppTheme.spacingLg,
+                bottom: AppTheme.spacingXl,
+              ),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
+                crossAxisSpacing: AppTheme.spacingLg,
+                mainAxisSpacing: AppTheme.spacingLg,
                 childAspectRatio: 1.1,
               ),
               itemCount: services.length,
@@ -240,41 +257,29 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   },
                   child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.2),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: Offset(0, 2),
-                        ),
-                      ],
-                    ),
+                    decoration: AppTheme.cardDecoration,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           services[index].icon,
-                          style: TextStyle(fontSize: 40),
+                          style: const TextStyle(fontSize: 40),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: AppTheme.spacingMd),
                         Text(
                           services[index].name,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: AppTheme.subheadingStyle,
+                          textAlign: TextAlign.center,
                         ),
-                        SizedBox(height: 4),
+                        const SizedBox(height: AppTheme.spacingXs),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: AppTheme.spacingMd,
+                          ),
                           child: Text(
                             services[index].description,
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.grey,
+                            style: AppTheme.bodyText.copyWith(
+                              color: AppTheme.greyColor,
                             ),
                             textAlign: TextAlign.center,
                             maxLines: 2,
@@ -294,8 +299,151 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildOrderHistory() {
-    return Center(
-      child: Text('Riwayat Pesanan'),
+    return SafeArea(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(AppTheme.spacingLg),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Riwayat Pesanan',
+                  style: AppTheme.heading1,
+                ),
+                TextButton.icon(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TripHistoryScreen(),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.history),
+                  label: Text(
+                    'Lihat Semua',
+                    style: AppTheme.bodyText.copyWith(
+                      color: AppTheme.primaryColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(
+                horizontal: AppTheme.spacingLg,
+              ),
+              itemCount: TripHistoryModel.exampleTrips.length,
+              itemBuilder: (context, index) {
+                final trip = TripHistoryModel.exampleTrips[index];
+                return Card(
+                  margin: const EdgeInsets.only(bottom: AppTheme.spacingMd),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(AppTheme.borderRadius),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(AppTheme.spacingMd),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              trip.order.pickupLocation,
+                              style: AppTheme.subheadingStyle,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Text(
+                              'Rp ${trip.order.price.toStringAsFixed(0)}',
+                              style: AppTheme.priceTextStyle,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: AppTheme.spacingXs),
+                        Row(
+                          children: [
+                            const Icon(
+                              Icons.location_on_outlined,
+                              size: 16,
+                              color: AppTheme.greyColor,
+                            ),
+                            const SizedBox(width: AppTheme.spacingXs),
+                            Expanded(
+                              child: Text(
+                                trip.order.destinationLocation,
+                                style: AppTheme.bodyText.copyWith(
+                                  color: AppTheme.greyColor,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: AppTheme.spacingMd),
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              radius: 16,
+                              backgroundColor: AppTheme.primaryColor.withOpacity(0.1),
+                              child: const Icon(
+                                Icons.person_outline,
+                                size: 16,
+                                color: AppTheme.primaryColor,
+                              ),
+                            ),
+                            const SizedBox(width: AppTheme.spacingSm),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  trip.driverName,
+                                  style: AppTheme.bodyText.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  '${trip.driverVehicle} • ${trip.driverPlateNumber}',
+                                  style: AppTheme.bodyText.copyWith(
+                                    color: AppTheme.greyColor,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.star,
+                                  size: 16,
+                                  color: Colors.amber,
+                                ),
+                                const SizedBox(width: AppTheme.spacingXs),
+                                Text(
+                                  trip.rating.toStringAsFixed(1),
+                                  style: AppTheme.bodyText.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
     );
   }
 } 
