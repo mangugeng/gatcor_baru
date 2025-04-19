@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import '../../models/service_model.dart';
 import '../../models/order_model.dart';
-import '../location/location_search_screen.dart';
 import '../payment/payment_screen.dart';
-import '../chat/chat_screen.dart';
-import 'trip_status_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../themes/app_theme.dart';
 import 'dart:async';
 import 'order_summary_screen.dart';
-import '../../models/driver_model.dart';
 
 class OrderScreen extends StatefulWidget {
   final ServiceModel service;
