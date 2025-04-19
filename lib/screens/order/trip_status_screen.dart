@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../models/order_model.dart';
-import '../../models/driver_model.dart';
 import '../chat/chat_screen.dart';
 import '../rating/rating_screen.dart';
 import '../../themes/app_theme.dart';
