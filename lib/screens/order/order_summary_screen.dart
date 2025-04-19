@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../models/order_model.dart';
-import '../models/service_model.dart';
-import '../styles/app_theme.dart';
+import '../../models/order_model.dart';
+import '../../models/service_model.dart';
+import '../../themes/app_theme.dart';
 import 'waiting_driver_screen.dart';
 
 class OrderSummaryScreen extends StatelessWidget {
@@ -212,23 +212,17 @@ class OrderSummaryScreen extends StatelessWidget {
     // Create order
     final order = OrderModel(
       id: DateTime.now().millisecondsSinceEpoch.toString(),
-      service: service,
+      userId: 'current_user_id', // TODO: Get from auth
+      driverId: '',
       pickupLocation: pickupAddress,
-      destination: destinationAddress,
-      distance: distance,
-      estimatedTime: estimatedTime,
-      price: estimatedPrice,
-      status: 'waiting',
-      createdAt: DateTime.now(),
-      driverType: selectedDriverType,
-      paymentMethod: selectedPaymentMethod,
+      destinationLocation: destinationAddress,
       pickupLat: pickupLocation.latitude,
       pickupLng: pickupLocation.longitude,
-      destLat: destinationLocation.latitude,
-      destLng: destinationLocation.longitude,
-      driverId: null,
-      promoCode: null,
-      discount: null,
+      destinationLat: destinationLocation.latitude,
+      destinationLng: destinationLocation.longitude,
+      status: 'waiting',
+      price: estimatedPrice,
+      createdAt: DateTime.now(),
     );
 
     // TODO: Send order to backend

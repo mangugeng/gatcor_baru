@@ -29,33 +29,28 @@ class SearchHistoryModel {
 
   static Future<List<SearchHistoryModel>> getHistory() async {
     final prefs = await SharedPreferences.getInstance();
-    final historyJson = prefs.getStringList('search_history') ?? [];
-    return historyJson
-        .map((json) => SearchHistoryModel.fromJson(
-            Map<String, dynamic>.from(jsonDecode(json))))
-        .toList();
+    final historyJson = prefs.getString('search_history') ?? '[]';
+    final List<dynamic> historyList = json.decode(historyJson);
+    return historyList.map((item) => SearchHistoryModel.fromJson(item)).toList();
   }
 
   static Future<void> addToHistory(SearchHistoryModel history) async {
     final prefs = await SharedPreferences.getInstance();
-    final historyList = await getHistory();
+    final currentHistory = await getHistory();
     
-    // Remove if already exists
-    historyList.removeWhere((h) => h.query == history.query);
+    // Remove duplicate entries
+    currentHistory.removeWhere((item) => item.query == history.query);
     
-    // Add to beginning
-    historyList.insert(0, history);
+    // Add new history to the beginning
+    currentHistory.insert(0, history);
     
-    // Limit to 20 items
-    if (historyList.length > 20) {
-      historyList.removeRange(20, historyList.length);
+    // Keep only the last 10 entries
+    if (currentHistory.length > 10) {
+      currentHistory.removeRange(10, currentHistory.length);
     }
     
-    // Save to storage
-    final historyJson = historyList
-        .map((h) => jsonEncode(h.toJson()))
-        .toList();
-    await prefs.setStringList('search_history', historyJson);
+    final historyJson = json.encode(currentHistory.map((item) => item.toJson()).toList());
+    await prefs.setString('search_history', historyJson);
   }
 
   static Future<void> clearHistory() async {

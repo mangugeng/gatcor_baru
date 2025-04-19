@@ -27,9 +27,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
       await _apiService.registerUser(
         name: _nameController.text,
         email: _emailController.text,
-        phone: _phoneController.text,
+        phoneNumber: _phoneController.text,
         password: _passwordController.text,
-        role: 'passenger', // Karena ini untuk penumpang
       );
 
       if (!mounted) return;

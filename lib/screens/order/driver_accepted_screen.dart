@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import '../models/order_model.dart';
-import '../styles/app_theme.dart';
-import 'chat_screen.dart';
+import '../../models/order_model.dart';
+import '../../themes/app_theme.dart';
+import '../chat/chat_screen.dart';
 import 'driver_location_screen.dart';
 import 'dart:async';
 
@@ -242,7 +242,7 @@ class _DriverAcceptedScreenState extends State<DriverAcceptedScreen> {
                   _buildOrderDetailRow(
                     Icons.flag,
                     'Tujuan',
-                    widget.order.destination,
+                    widget.order.destinationLocation,
                   ),
                   const SizedBox(height: 12),
                   _buildOrderDetailRow(

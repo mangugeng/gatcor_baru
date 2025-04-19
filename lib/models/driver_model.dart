@@ -1,51 +1,41 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'driver_model.g.dart';
+
+@JsonSerializable()
 class DriverModel {
   final String id;
   final String name;
-  final String phone;
+  final String phoneNumber;
+  final String email;
+  final String profilePicture;
+  final double rating;
+  final int totalTrips;
   final String vehicleType;
   final String vehicleNumber;
-  final double rating;
-  final String photoUrl;
-  final double latitude;
-  final double longitude;
+  final String vehicleColor;
+  final double currentLat;
+  final double currentLng;
+  final bool isAvailable;
+  final String status;
 
   DriverModel({
     required this.id,
     required this.name,
-    required this.phone,
+    required this.phoneNumber,
+    required this.email,
+    required this.profilePicture,
+    required this.rating,
+    required this.totalTrips,
     required this.vehicleType,
     required this.vehicleNumber,
-    required this.rating,
-    required this.photoUrl,
-    required this.latitude,
-    required this.longitude,
+    required this.vehicleColor,
+    required this.currentLat,
+    required this.currentLng,
+    this.isAvailable = true,
+    this.status = 'available',
   });
 
-  factory DriverModel.fromJson(Map<String, dynamic> json) {
-    return DriverModel(
-      id: json['id'],
-      name: json['name'],
-      phone: json['phone'],
-      vehicleType: json['vehicleType'],
-      vehicleNumber: json['vehicleNumber'],
-      rating: json['rating'].toDouble(),
-      photoUrl: json['photoUrl'],
-      latitude: json['latitude'].toDouble(),
-      longitude: json['longitude'].toDouble(),
-    );
-  }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'phone': phone,
-      'vehicleType': vehicleType,
-      'vehicleNumber': vehicleNumber,
-      'rating': rating,
-      'photoUrl': photoUrl,
-      'latitude': latitude,
-      'longitude': longitude,
-    };
-  }
+  factory DriverModel.fromJson(Map<String, dynamic> json) => _$DriverModelFromJson(json);
+  Map<String, dynamic> toJson() => _$DriverModelToJson(this);
 } 

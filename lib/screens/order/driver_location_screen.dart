@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:async';
-import '../models/order_model.dart';
-import '../styles/app_theme.dart';
+import '../../models/order_model.dart';
+import '../../themes/app_theme.dart';
 import 'trip_status_screen.dart';
 
 class DriverLocationScreen extends StatefulWidget {

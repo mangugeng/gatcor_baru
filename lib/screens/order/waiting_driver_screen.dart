@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/order_model.dart';
-import '../styles/app_theme.dart';
+import '../../models/order_model.dart';
+import '../../themes/app_theme.dart';
 import 'driver_accepted_screen.dart';
 
 class WaitingDriverScreen extends StatefulWidget {
@@ -95,12 +95,12 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
           borderRadius: BorderRadius.circular(20),
         ),
         child: Container(
-          padding: const EdgeInsets.all(24),
+          padding: AppTheme.defaultPadding,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: AppTheme.defaultPadding,
                 decoration: BoxDecoration(
                   color: Colors.red.shade50,
                   shape: BoxShape.circle,
@@ -108,23 +108,19 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
                 child: Icon(
                   Icons.warning_rounded,
                   color: Colors.red.shade700,
-                  size: 32,
+                  size: AppTheme.largeIconSize,
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
+              Text(
                 'Alasan Pembatalan',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                style: AppTheme.headingStyle,
               ),
               const SizedBox(height: 8),
-              const Text(
+              Text(
                 'Pilih alasan pembatalan pesanan Anda',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
+                style: AppTheme.bodyTextStyle.copyWith(
+                  color: AppTheme.greyColor,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -139,7 +135,7 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
                     },
                     borderRadius: BorderRadius.circular(12),
                     child: Container(
-                      padding: const EdgeInsets.all(16),
+                      padding: AppTheme.defaultPadding,
                       decoration: BoxDecoration(
                         color: reason['color'].withOpacity(0.1),
                         borderRadius: BorderRadius.circular(12),
@@ -153,7 +149,7 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
                           Icon(
                             reason['icon'],
                             color: reason['color'],
-                            size: 24,
+                            size: AppTheme.mediumIconSize,
                           ),
                           const SizedBox(width: 16),
                           Text(
@@ -192,7 +188,7 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Menunggu Driver',
           style: AppTheme.appBarTitleStyle,
         ),
@@ -201,7 +197,7 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
         backgroundColor: AppTheme.primaryColor,
         foregroundColor: AppTheme.whiteColor,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: AppTheme.whiteColor),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -225,7 +221,7 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
                           gradient: RadialGradient(
                             colors: [
                               AppTheme.primaryColor.withOpacity(0.1),
-                              Colors.white,
+                              AppTheme.whiteColor,
                             ],
                             stops: const [0.0, 0.7],
                           ),
@@ -275,7 +271,7 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
                         width: 100,
                         height: 100,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: AppTheme.whiteColor,
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
@@ -287,7 +283,7 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
                         ),
                         child: Icon(
                           Icons.person_search,
-                          size: 50,
+                          size: AppTheme.largeIconSize,
                           color: AppTheme.primaryColor,
                         ),
                       ),
@@ -310,9 +306,9 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
                   const SizedBox(height: 40),
                   // Status Text
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    padding: AppTheme.defaultPadding,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppTheme.whiteColor,
                       borderRadius: BorderRadius.circular(30),
                       boxShadow: [
                         BoxShadow(
@@ -326,18 +322,15 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
                       children: [
                         Text(
                           'Mencari Driver',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.grey.shade800,
+                          style: AppTheme.headingStyle.copyWith(
+                            color: AppTheme.blackColor,
                           ),
                         ),
                         const SizedBox(height: 4),
                         Text(
                           'Mohon tunggu sebentar...',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey.shade600,
+                          style: AppTheme.bodyTextStyle.copyWith(
+                            color: AppTheme.greyColor,
                           ),
                         ),
                       ],
@@ -346,10 +339,10 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
                   const SizedBox(height: 40),
                   // Order Details
                   Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 24),
-                    padding: const EdgeInsets.all(24),
+                    margin: AppTheme.defaultPadding,
+                    padding: AppTheme.defaultPadding,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: AppTheme.whiteColor,
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: [
                         BoxShadow(
@@ -369,18 +362,18 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
                         const SizedBox(height: 16),
                         Container(
                           height: 1,
-                          color: Colors.grey.shade200,
+                          color: AppTheme.greyColor.withOpacity(0.2),
                         ),
                         const SizedBox(height: 16),
                         _buildOrderDetailRow(
                           'Lokasi Tujuan',
-                          widget.order.destination,
+                          widget.order.destinationLocation,
                           Icons.location_on,
                         ),
                         const SizedBox(height: 16),
                         Container(
                           height: 1,
-                          color: Colors.grey.shade200,
+                          color: AppTheme.greyColor.withOpacity(0.2),
                         ),
                         const SizedBox(height: 16),
                         _buildOrderDetailRow(
@@ -424,15 +417,13 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
                   Icon(
                     Icons.close,
                     color: Colors.red.shade700,
-                    size: 20,
+                    size: AppTheme.smallIconSize,
                   ),
                   const SizedBox(width: 8),
                   Text(
                     'Batalkan Pesanan',
-                    style: TextStyle(
+                    style: AppTheme.buttonTextStyle.copyWith(
                       color: Colors.red.shade700,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
@@ -453,7 +444,7 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
             color: AppTheme.primaryColor.withOpacity(0.1),
             shape: BoxShape.circle,
           ),
-          child: Icon(icon, color: AppTheme.primaryColor, size: 22),
+          child: Icon(icon, color: AppTheme.primaryColor, size: AppTheme.smallIconSize),
         ),
         const SizedBox(width: 16),
         Expanded(
@@ -462,17 +453,16 @@ class _WaitingDriverScreenState extends State<WaitingDriverScreen> with SingleTi
             children: [
               Text(
                 label,
-                style: TextStyle(
+                style: AppTheme.bodyTextStyle.copyWith(
                   fontSize: 12,
-                  color: Colors.grey.shade600,
                 ),
               ),
               const SizedBox(height: 4),
               Text(
                 value,
-                style: TextStyle(
+                style: AppTheme.subheadingStyle.copyWith(
                   fontSize: 15,
-                  color: isPrice ? AppTheme.primaryColor : Colors.grey.shade800,
+                  color: isPrice ? AppTheme.primaryColor : AppTheme.blackColor,
                   fontWeight: isPrice ? FontWeight.bold : FontWeight.w500,
                 ),
               ),

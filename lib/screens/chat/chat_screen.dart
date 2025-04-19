@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/order_model.dart';
-import '../styles/app_theme.dart';
+import '../../models/order_model.dart';
+import '../../themes/app_theme.dart';
 
 class ChatScreen extends StatefulWidget {
   final String driverName;

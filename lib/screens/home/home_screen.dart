@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/service_model.dart';
-import '../service/promo_detail_screen.dart';
+import '../promo/promo_detail_screen.dart';
 import '../service/service_detail_screen.dart';
 import '../profile/profile_screen.dart';
 import '../order/order_screen.dart';
@@ -19,28 +19,36 @@ class _HomeScreenState extends State<HomeScreen> {
       name: 'Gatcor Motor',
       icon: '🏍️',
       description: 'Ojek online dengan motor',
-      type: 'transport',
+      basePrice: 10000,
+      pricePerKm: 2000,
+      isAvailable: true,
     ),
     ServiceModel(
       id: '2',
       name: 'Gatcor Car',
       icon: '🚗',
       description: 'Taksi online dengan mobil',
-      type: 'transport',
+      basePrice: 15000,
+      pricePerKm: 3000,
+      isAvailable: true,
     ),
     ServiceModel(
       id: '3',
       name: 'Gatcor Kirim',
       icon: '📦',
       description: 'Layanan pengiriman barang',
-      type: 'delivery',
+      basePrice: 8000,
+      pricePerKm: 1500,
+      isAvailable: true,
     ),
     ServiceModel(
       id: '4',
       name: 'Gatcor Food',
       icon: '🍔',
       description: 'Pesan makanan online',
-      type: 'food',
+      basePrice: 5000,
+      pricePerKm: 1000,
+      isAvailable: true,
     ),
   ];
 

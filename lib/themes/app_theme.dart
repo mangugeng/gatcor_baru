@@ -7,6 +7,7 @@ class AppTheme {
   static const Color greyColor = Colors.grey;
   static const Color blackColor = Colors.black87;
   static const Color lightGreyColor = Colors.black54;
+  static const Color successColor = Colors.green;
   
   // Text Styles
   static const TextStyle appBarTitleStyle = TextStyle(
@@ -67,6 +68,23 @@ class AppTheme {
   static const TextStyle infoTextStyle = TextStyle(
     fontSize: 12,
     color: blackColor,
+  );
+
+  static const TextStyle headingStyle = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: blackColor,
+  );
+
+  static const TextStyle subheadingStyle = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.bold,
+    color: blackColor,
+  );
+
+  static const TextStyle bodyTextStyle = TextStyle(
+    fontSize: 16,
+    color: greyColor,
   );
 
   // Container Styles

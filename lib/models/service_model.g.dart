@@ -9,16 +9,20 @@ part of 'service_model.dart';
 ServiceModel _$ServiceModelFromJson(Map<String, dynamic> json) => ServiceModel(
       id: json['id'] as String,
       name: json['name'] as String,
-      icon: json['icon'] as String,
       description: json['description'] as String,
-      type: json['type'] as String,
+      basePrice: (json['basePrice'] as num).toDouble(),
+      pricePerKm: (json['pricePerKm'] as num).toDouble(),
+      icon: json['icon'] as String,
+      isAvailable: json['isAvailable'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$ServiceModelToJson(ServiceModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'icon': instance.icon,
       'description': instance.description,
-      'type': instance.type,
+      'basePrice': instance.basePrice,
+      'pricePerKm': instance.pricePerKm,
+      'icon': instance.icon,
+      'isAvailable': instance.isAvailable,
     };

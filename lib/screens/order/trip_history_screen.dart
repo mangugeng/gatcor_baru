@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../models/trip_history_model.dart';
-import '../styles/app_theme.dart';
+import '../../models/trip_history_model.dart';
+import '../../themes/app_theme.dart';
 
 class TripHistoryScreen extends StatelessWidget {
   const TripHistoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final trips = TripHistoryModel.sampleTrips;
+    final trips = TripHistoryModel.exampleTrips;
 
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
@@ -76,7 +76,7 @@ class TripHistoryScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              trip.driverVehicle,
+                              '${trip.driverVehicle} • ${trip.driverPlateNumber}',
                               style: TextStyle(
                                 color: Colors.grey.shade600,
                                 fontSize: 14,
@@ -125,7 +125,7 @@ class TripHistoryScreen extends StatelessWidget {
                       _buildLocationRow(
                         Icons.flag,
                         'Tujuan',
-                        trip.order.destination,
+                        trip.order.destinationLocation,
                       ),
                       const SizedBox(height: 12),
                       _buildLocationRow(
@@ -137,8 +137,16 @@ class TripHistoryScreen extends StatelessWidget {
                       _buildLocationRow(
                         Icons.calendar_today,
                         'Tanggal',
-                        '${trip.date.day}/${trip.date.month}/${trip.date.year}',
+                        '${trip.completedAt.day}/${trip.completedAt.month}/${trip.completedAt.year}',
                       ),
+                      if (trip.comment != null) ...[
+                        const SizedBox(height: 12),
+                        _buildLocationRow(
+                          Icons.comment,
+                          'Komentar',
+                          trip.comment!,
+                        ),
+                      ],
                     ],
                   ),
                 ),

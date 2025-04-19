@@ -1,54 +1,39 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'service_model.dart';
 
 part 'order_model.g.dart';
 
 @JsonSerializable()
 class OrderModel {
   final String id;
-  @JsonKey(fromJson: _serviceFromJson, toJson: _serviceToJson)
-  final ServiceModel service;
+  final String userId;
+  final String driverId;
   final String pickupLocation;
-  final String destination;
-  final double distance;
-  final int estimatedTime;
-  final double price;
-  final String status;
-  final DateTime createdAt;
-  final String driverType;
-  final String paymentMethod;
+  final String destinationLocation;
   final double pickupLat;
   final double pickupLng;
-  final double destLat;
-  final double destLng;
-  final String? driverId;
-  final String? promoCode;
-  final double? discount;
+  final double destinationLat;
+  final double destinationLng;
+  final String status;
+  final double price;
+  final DateTime createdAt;
+  final DateTime? completedAt;
 
   OrderModel({
     required this.id,
-    required this.service,
+    required this.userId,
+    required this.driverId,
     required this.pickupLocation,
-    required this.destination,
-    required this.distance,
-    required this.estimatedTime,
-    required this.price,
-    required this.status,
-    required this.createdAt,
-    required this.driverType,
-    required this.paymentMethod,
+    required this.destinationLocation,
     required this.pickupLat,
     required this.pickupLng,
-    required this.destLat,
-    required this.destLng,
-    this.driverId,
-    this.promoCode,
-    this.discount,
+    required this.destinationLat,
+    required this.destinationLng,
+    required this.status,
+    required this.price,
+    required this.createdAt,
+    this.completedAt,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => _$OrderModelFromJson(json);
   Map<String, dynamic> toJson() => _$OrderModelToJson(this);
-
-  static ServiceModel _serviceFromJson(Map<String, dynamic> json) => ServiceModel.fromJson(json);
-  static Map<String, dynamic> _serviceToJson(ServiceModel service) => service.toJson();
 } 

@@ -6,16 +6,20 @@ part 'service_model.g.dart';
 class ServiceModel {
   final String id;
   final String name;
-  final String icon;
   final String description;
-  final String type;
+  final double basePrice;
+  final double pricePerKm;
+  final String icon;
+  final bool isAvailable;
 
   ServiceModel({
     required this.id,
     required this.name,
-    required this.icon,
     required this.description,
-    required this.type,
+    required this.basePrice,
+    required this.pricePerKm,
+    required this.icon,
+    this.isAvailable = true,
   });
 
   factory ServiceModel.fromJson(Map<String, dynamic> json) => _$ServiceModelFromJson(json);

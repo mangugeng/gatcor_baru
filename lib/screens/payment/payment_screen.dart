@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/order_model.dart';
-import '../styles/app_theme.dart';
+import '../../models/order_model.dart';
+import '../../themes/app_theme.dart';
 
 class PaymentScreen extends StatelessWidget {
   final OrderModel order;
@@ -15,19 +15,18 @@ class PaymentScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Pembayaran',
-          style: TextStyle(
-            color: Colors.black87,
+          style: AppTheme.appBarTitleStyle.copyWith(
+            color: AppTheme.blackColor,
             fontSize: 18,
-            fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: AppTheme.whiteColor,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: AppTheme.blackColor),
           onPressed: () => Navigator.pop(context),
         ),
       ),
@@ -36,10 +35,10 @@ class PaymentScreen extends StatelessWidget {
           children: [
             // Order Summary
             Container(
-              margin: const EdgeInsets.all(16),
-              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(horizontal: 16),
+              padding: AppTheme.defaultPadding,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppTheme.whiteColor,
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
@@ -52,12 +51,9 @@ class PaymentScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Ringkasan Pesanan',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: AppTheme.subheadingStyle,
                   ),
                   const SizedBox(height: 16),
                   _buildOrderDetailRow(
@@ -69,7 +65,7 @@ class PaymentScreen extends StatelessWidget {
                   _buildOrderDetailRow(
                     Icons.flag,
                     'Tujuan',
-                    order.destination,
+                    order.destinationLocation,
                   ),
                   const SizedBox(height: 12),
                   _buildOrderDetailRow(
@@ -83,9 +79,9 @@ class PaymentScreen extends StatelessWidget {
             // Payment Methods
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 16),
-              padding: const EdgeInsets.all(16),
+              padding: AppTheme.defaultPadding,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppTheme.whiteColor,
                 borderRadius: BorderRadius.circular(15),
                 boxShadow: [
                   BoxShadow(
@@ -98,12 +94,9 @@ class PaymentScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Metode Pembayaran',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: AppTheme.subheadingStyle,
                   ),
                   const SizedBox(height: 16),
                   _buildPaymentMethod(
@@ -135,7 +128,7 @@ class PaymentScreen extends StatelessWidget {
             const SizedBox(height: 24),
             // Pay Button
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: AppTheme.defaultPadding,
               child: ElevatedButton(
                 onPressed: () {
                   // TODO: Handle payment
@@ -143,18 +136,15 @@ class PaymentScreen extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppTheme.primaryColor,
-                  foregroundColor: Colors.white,
+                  foregroundColor: AppTheme.whiteColor,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   'Bayar Sekarang',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: AppTheme.buttonTextStyle,
                 ),
               ),
             ),
@@ -171,7 +161,7 @@ class PaymentScreen extends StatelessWidget {
         Icon(
           icon,
           color: AppTheme.primaryColor,
-          size: 20,
+          size: AppTheme.smallIconSize,
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -180,17 +170,15 @@ class PaymentScreen extends StatelessWidget {
             children: [
               Text(
                 label,
-                style: TextStyle(
+                style: AppTheme.bodyTextStyle.copyWith(
                   fontSize: 12,
-                  color: Colors.grey.shade600,
                 ),
               ),
               const SizedBox(height: 4),
               Text(
                 value,
-                style: const TextStyle(
+                style: AppTheme.subheadingStyle.copyWith(
                   fontSize: 14,
-                  fontWeight: FontWeight.w500,
                 ),
               ),
             ],
@@ -207,7 +195,7 @@ class PaymentScreen extends StatelessWidget {
           width: 40,
           height: 40,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppTheme.whiteColor,
             borderRadius: BorderRadius.circular(10),
             image: DecorationImage(
               image: AssetImage(iconPath),
@@ -219,9 +207,8 @@ class PaymentScreen extends StatelessWidget {
         Expanded(
           child: Text(
             name,
-            style: const TextStyle(
+            style: AppTheme.subheadingStyle.copyWith(
               fontSize: 16,
-              fontWeight: FontWeight.w500,
             ),
           ),
         ),
@@ -232,10 +219,10 @@ class PaymentScreen extends StatelessWidget {
               color: AppTheme.primaryColor,
               shape: BoxShape.circle,
             ),
-            child: const Icon(
+            child: Icon(
               Icons.check,
-              color: Colors.white,
-              size: 16,
+              color: AppTheme.whiteColor,
+              size: AppTheme.smallIconSize,
             ),
           ),
       ],

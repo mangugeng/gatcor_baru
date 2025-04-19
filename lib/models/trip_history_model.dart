@@ -1,89 +1,83 @@
-import 'package:flutter/material.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'order_model.dart';
 import 'service_model.dart';
 
+part 'trip_history_model.g.dart';
+
+@JsonSerializable()
 class TripHistoryModel {
   final String id;
   final OrderModel order;
   final String driverName;
   final String driverVehicle;
+  final String driverPlateNumber;
   final double rating;
-  final DateTime date;
-  final String status;
+  final String? comment;
+  final DateTime completedAt;
 
   TripHistoryModel({
     required this.id,
     required this.order,
     required this.driverName,
     required this.driverVehicle,
+    required this.driverPlateNumber,
     required this.rating,
-    required this.date,
-    required this.status,
+    this.comment,
+    required this.completedAt,
   });
 
-  // Contoh data untuk testing
-  static List<TripHistoryModel> get sampleTrips => [
+  factory TripHistoryModel.fromJson(Map<String, dynamic> json) => _$TripHistoryModelFromJson(json);
+  Map<String, dynamic> toJson() => _$TripHistoryModelToJson(this);
+
+  // Example data for testing
+  static List<TripHistoryModel> get exampleTrips => [
         TripHistoryModel(
           id: '1',
           order: OrderModel(
-            id: '1',
-            pickupLocation: 'Jl. Sudirman No. 123',
-            destination: 'Grand Indonesia',
-            price: 50000,
-            status: 'completed',
-            service: ServiceModel(
-              id: '1',
-              name: 'Regular',
-              type: 'Car',
-              description: 'Layanan reguler',
-              icon: 'assets/icons/car.png',
-            ),
-            distance: 5.2,
-            estimatedTime: 15,
-            createdAt: DateTime.now().subtract(const Duration(days: 1)),
-            driverType: 'Car',
-            paymentMethod: 'Cash',
+            id: 'order1',
+            userId: 'user1',
+            driverId: 'driver1',
+            pickupLocation: 'Jl. Sudirman No. 1',
+            destinationLocation: 'Jl. Thamrin No. 10',
             pickupLat: -6.2088,
             pickupLng: 106.8456,
-            destLat: -6.1950,
-            destLng: 106.8200,
+            destinationLat: -6.2088,
+            destinationLng: 106.8456,
+            status: 'completed',
+            price: 50000,
+            createdAt: DateTime.now().subtract(const Duration(days: 1)),
+            completedAt: DateTime.now().subtract(const Duration(hours: 23)),
           ),
           driverName: 'Mang Ugeng',
-          driverVehicle: 'Toyota Avanza • B 1234 ABC',
+          driverVehicle: 'Toyota Avanza',
+          driverPlateNumber: 'B 1234 ABC',
           rating: 4.8,
-          date: DateTime.now().subtract(const Duration(days: 1)),
-          status: 'completed',
+          comment: 'Driver sangat ramah dan tepat waktu',
+          completedAt: DateTime.now().subtract(const Duration(hours: 23)),
         ),
         TripHistoryModel(
           id: '2',
           order: OrderModel(
-            id: '2',
-            pickupLocation: 'Senayan City',
-            destination: 'Kemang',
-            price: 45000,
+            id: 'order2',
+            userId: 'user1',
+            driverId: 'driver2',
+            pickupLocation: 'Jl. Gatot Subroto No. 5',
+            destinationLocation: 'Jl. Asia Afrika No. 8',
+            pickupLat: -6.2088,
+            pickupLng: 106.8456,
+            destinationLat: -6.2088,
+            destinationLng: 106.8456,
             status: 'completed',
-            service: ServiceModel(
-              id: '1',
-              name: 'Regular',
-              type: 'Car',
-              description: 'Layanan reguler',
-              icon: 'assets/icons/car.png',
-            ),
-            distance: 4.8,
-            estimatedTime: 12,
-            createdAt: DateTime.now().subtract(const Duration(days: 3)),
-            driverType: 'Car',
-            paymentMethod: 'Cash',
-            pickupLat: -6.2250,
-            pickupLng: 106.8000,
-            destLat: -6.2500,
-            destLng: 106.8200,
+            price: 45000,
+            createdAt: DateTime.now().subtract(const Duration(days: 2)),
+            completedAt: DateTime.now().subtract(const Duration(days: 1, hours: 12)),
           ),
           driverName: 'Pak Budi',
-          driverVehicle: 'Daihatsu Xenia • B 5678 DEF',
+          driverVehicle: 'Daihatsu Xenia',
+          driverPlateNumber: 'B 5678 DEF',
           rating: 4.5,
-          date: DateTime.now().subtract(const Duration(days: 3)),
-          status: 'completed',
+          comment: 'Perjalanan nyaman dan aman',
+          completedAt: DateTime.now().subtract(const Duration(days: 1, hours: 12)),
         ),
       ];
 } 

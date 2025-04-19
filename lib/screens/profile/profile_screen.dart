@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../styles/app_theme.dart';
+import '../../themes/app_theme.dart';
 
 class ProfileScreen extends StatelessWidget {
   @override
@@ -7,24 +7,23 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Profil',
-          style: TextStyle(
-            color: Colors.black87,
+          style: AppTheme.appBarTitleStyle.copyWith(
+            color: AppTheme.blackColor,
             fontSize: 18,
-            fontWeight: FontWeight.bold,
           ),
         ),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: AppTheme.whiteColor,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: AppTheme.blackColor),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.settings, color: Colors.black),
+            icon: Icon(Icons.settings, color: AppTheme.blackColor),
             onPressed: () {
               // TODO: Navigate to settings
             },
@@ -36,9 +35,9 @@ class ProfileScreen extends StatelessWidget {
           children: [
             // Profile Header
             Container(
-              padding: const EdgeInsets.all(24),
+              padding: AppTheme.defaultPadding,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppTheme.whiteColor,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.05),
@@ -72,34 +71,28 @@ class ProfileScreen extends StatelessWidget {
                             color: AppTheme.primaryColor,
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: Colors.white,
+                              color: AppTheme.whiteColor,
                               width: 2,
                             ),
                           ),
-                          child: const Icon(
+                          child: Icon(
                             Icons.camera_alt,
-                            color: Colors.white,
-                            size: 16,
+                            color: AppTheme.whiteColor,
+                            size: AppTheme.smallIconSize,
                           ),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 16),
-                  const Text(
+                  Text(
                     'Mang Ugeng',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppTheme.headingStyle,
                   ),
                   const SizedBox(height: 8),
                   Text(
                     'test3@example.com',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey.shade600,
-                    ),
+                    style: AppTheme.bodyTextStyle,
                   ),
                   const SizedBox(height: 16),
                   Row(
@@ -118,7 +111,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 24),
             // Menu Items
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: AppTheme.defaultPadding,
               child: Column(
                 children: [
                   _buildMenuItem(
@@ -180,7 +173,7 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 24),
             // Logout Button
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: AppTheme.defaultPadding,
               child: ElevatedButton(
                 onPressed: () {
                   _showLogoutDialog(context);
@@ -194,16 +187,15 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   elevation: 0,
                 ),
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.logout),
-                    SizedBox(width: 8),
+                    const Icon(Icons.logout),
+                    const SizedBox(width: 8),
                     Text(
                       'Keluar',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                      style: AppTheme.buttonTextStyle.copyWith(
+                        color: Colors.red,
                       ),
                     ),
                   ],
@@ -222,17 +214,15 @@ class ProfileScreen extends StatelessWidget {
       children: [
         Text(
           value,
-          style: const TextStyle(
+          style: AppTheme.headingStyle.copyWith(
             fontSize: 20,
-            fontWeight: FontWeight.bold,
           ),
         ),
         const SizedBox(height: 4),
         Text(
           label,
-          style: TextStyle(
+          style: AppTheme.bodyTextStyle.copyWith(
             fontSize: 14,
-            color: Colors.grey.shade600,
           ),
         ),
       ],
@@ -260,21 +250,20 @@ class ProfileScreen extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: const TextStyle(
+        style: AppTheme.subheadingStyle.copyWith(
           fontSize: 16,
           fontWeight: FontWeight.w500,
         ),
       ),
       subtitle: Text(
         subtitle,
-        style: TextStyle(
+        style: AppTheme.bodyTextStyle.copyWith(
           fontSize: 12,
-          color: Colors.grey.shade600,
         ),
       ),
       trailing: Icon(
         Icons.chevron_right,
-        color: Colors.grey.shade400,
+        color: AppTheme.greyColor,
       ),
       onTap: onTap,
     );
@@ -284,21 +273,32 @@ class ProfileScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Keluar'),
-        content: const Text('Apakah Anda yakin ingin keluar?'),
+        title: Text(
+          'Keluar',
+          style: AppTheme.subheadingStyle,
+        ),
+        content: Text(
+          'Apakah Anda yakin ingin keluar?',
+          style: AppTheme.bodyTextStyle,
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Batal'),
+            child: Text(
+              'Batal',
+              style: AppTheme.bodyTextStyle,
+            ),
           ),
           TextButton(
             onPressed: () {
               Navigator.pop(context);
               // TODO: Handle logout
             },
-            child: const Text(
+            child: Text(
               'Keluar',
-              style: TextStyle(color: Colors.red),
+              style: AppTheme.bodyTextStyle.copyWith(
+                color: Colors.red,
+              ),
             ),
           ),
         ],

@@ -1,17 +1,28 @@
 import 'package:flutter/material.dart';
-import '../models/service_model.dart';
+import '../../models/service_model.dart';
+import '../../themes/app_theme.dart';
 
 class ServiceDetailScreen extends StatelessWidget {
   final ServiceModel service;
 
-  ServiceDetailScreen({required this.service});
+  const ServiceDetailScreen({super.key, required this.service});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(service.name),
-        backgroundColor: Colors.blue,
+        title: Text(
+          service.name,
+          style: AppTheme.appBarTitleStyle,
+        ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: AppTheme.primaryColor,
+        foregroundColor: AppTheme.whiteColor,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -20,60 +31,48 @@ class ServiceDetailScreen extends StatelessWidget {
             Container(
               height: 200,
               width: double.infinity,
-              color: Colors.blue[50],
+              color: AppTheme.primaryColor.withOpacity(0.1),
               child: Center(
                 child: Text(
                   service.icon,
-                  style: TextStyle(fontSize: 100),
+                  style: const TextStyle(fontSize: 100),
                 ),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: AppTheme.defaultPadding,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     service.name,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppTheme.headingStyle,
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                     service.description,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[600],
-                    ),
+                    style: AppTheme.bodyTextStyle,
                   ),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   Text(
                     'Harga',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppTheme.subheadingStyle,
                   ),
-                  SizedBox(height: 8),
-                  _buildPriceInfo('Tarif Awal', 'Rp 8.000'),
-                  _buildPriceInfo('Per Kilometer', 'Rp 2.000'),
+                  const SizedBox(height: 8),
+                  _buildPriceInfo('Tarif Awal', 'Rp ${service.basePrice}'),
+                  _buildPriceInfo('Per Kilometer', 'Rp ${service.pricePerKm}'),
                   _buildPriceInfo('Estimasi Waktu Tunggu', '5-10 menit'),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   Text(
                     'Fitur',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: AppTheme.subheadingStyle,
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   _buildFeature('Driver berpengalaman'),
                   _buildFeature('Pembayaran cashless'),
                   _buildFeature('Lacak perjalanan real-time'),
                   _buildFeature('Asuransi perjalanan'),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -81,9 +80,20 @@ class ServiceDetailScreen extends StatelessWidget {
                         // TODO: Navigate to order screen
                       },
                       style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 16),
+                        backgroundColor: AppTheme.primaryColor,
+                        foregroundColor: AppTheme.whiteColor,
+                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
-                      child: Text('Pesan Sekarang'),
+                      child: const Text(
+                        'Pesan Sekarang',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
                 ],
@@ -101,12 +111,15 @@ class ServiceDetailScreen extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label),
+          Text(
+            label,
+            style: AppTheme.bodyTextStyle,
+          ),
           Text(
             value,
-            style: TextStyle(
+            style: AppTheme.bodyTextStyle.copyWith(
               fontWeight: FontWeight.bold,
-              color: Colors.blue,
+              color: AppTheme.primaryColor,
             ),
           ),
         ],
@@ -119,9 +132,16 @@ class ServiceDetailScreen extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Row(
         children: [
-          Icon(Icons.check_circle, color: Colors.green, size: 20),
-          SizedBox(width: 8),
-          Text(text),
+          Icon(
+            Icons.check_circle,
+            color: AppTheme.successColor,
+            size: 20,
+          ),
+          const SizedBox(width: 8),
+          Text(
+            text,
+            style: AppTheme.bodyTextStyle,
+          ),
         ],
       ),
     );

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import '../models/search_history_model.dart';
-import '../themes/app_theme.dart';
+import '../../models/search_history_model.dart';
+import '../../themes/app_theme.dart';
 
 class LocationSearchScreen extends StatefulWidget {
   final String? initialQuery;

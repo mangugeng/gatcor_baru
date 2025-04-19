@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/order_model.dart';
-import '../styles/app_theme.dart';
-import '../models/trip_history_model.dart';
+import '../../models/order_model.dart';
+import '../../themes/app_theme.dart';
+import '../../models/trip_history_model.dart';
 
 class RatingScreen extends StatefulWidget {
   final OrderModel order;
