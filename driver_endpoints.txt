@@ -1,0 +1,192 @@
+# Driver Endpoints
+
+## 1. Get Available Drivers
+GET /api/drivers/available
+Headers:
+- Authorization: Bearer {token}
+- Content-Type: application/json
+
+Response:
+{
+  "drivers": [
+    {
+      "id": "driver_123",
+      "name": "Mang Ugeng",
+      "rating": 4.8,
+      "vehicle": {
+        "type": "motorcycle",
+        "brand": "Honda",
+        "model": "Vario 160",
+        "plateNumber": "B 1234 ABC"
+      },
+      "location": {
+        "lat": -6.2088,
+        "lng": 106.8456
+      },
+      "distance": 2.5,           // Jarak dari lokasi penjemputan (km)
+      "eta": 5,                  // Estimasi waktu tiba (menit)
+      "price": 25000,            // Harga per km
+      "serviceType": "standard"  // Jenis layanan
+    }
+  ]
+}
+
+## 2. Get Driver Details
+GET /api/drivers/:driverId
+Headers:
+- Authorization: Bearer {token}
+- Content-Type: application/json
+
+Response:
+{
+  "id": "driver_123",
+  "name": "Mang Ugeng",
+  "phone": "081234567890",
+  "rating": 4.8,
+  "totalTrips": 150,
+  "joinedSince": "2023-01-01",
+  "vehicle": {
+    "type": "motorcycle",
+    "brand": "Honda",
+    "model": "Vario 160",
+    "plateNumber": "B 1234 ABC",
+    "year": 2022,
+    "color": "Hitam"
+  },
+  "documents": {
+    "sim": "1234567890",
+    "stnk": "ABCD123456",
+    "insurance": "active"
+  },
+  "statistics": {
+    "averageRating": 4.8,
+    "totalTrips": 150,
+    "cancellationRate": 0.02,
+    "responseTime": 2.5
+  },
+  "reviews": [
+    {
+      "userName": "John Doe",
+      "rating": 5,
+      "comment": "Driver sangat ramah dan aman dalam berkendara",
+      "date": "2024-02-15"
+    }
+  ]
+}
+
+## 3. Select Driver for Order
+POST /api/orders/:orderId/select-driver
+Headers:
+- Authorization: Bearer {token}
+- Content-Type: application/json
+
+Request:
+{
+  "driverId": "driver_123"
+}
+
+Response:
+{
+  "success": true,
+  "message": "Driver berhasil dipilih",
+  "order": {
+    "id": "order_123",
+    "status": "driver_selected",
+    "driver": {
+      "id": "driver_123",
+      "name": "Mang Ugeng",
+      "phone": "081234567890",
+      "vehicle": {
+        "type": "motorcycle",
+        "brand": "Honda",
+        "model": "Vario 160",
+        "plateNumber": "B 1234 ABC"
+      }
+    }
+  }
+}
+
+## 4. Get Driver Status
+GET /api/drivers/:driverId/status
+Headers:
+- Authorization: Bearer {token}
+- Content-Type: application/json
+
+Response:
+{
+  "status": "available",  // available, busy, offline
+  "currentLocation": {
+    "lat": -6.2088,
+    "lng": 106.8456
+  },
+  "lastUpdate": "2024-02-17T10:30:00Z",
+  "currentOrder": null    // null jika tidak ada order aktif
+}
+
+## 5. Update Driver Location
+POST /api/drivers/:driverId/location
+Headers:
+- Authorization: Bearer {token}
+- Content-Type: application/json
+
+Request:
+{
+  "lat": -6.2088,
+  "lng": 106.8456,
+  "timestamp": "2024-02-17T10:30:00Z"
+}
+
+Response:
+{
+  "success": true,
+  "message": "Lokasi berhasil diperbarui"
+}
+
+## 6. Cancel Driver Selection
+POST /api/orders/:orderId/cancel-driver
+Headers:
+- Authorization: Bearer {token}
+- Content-Type: application/json
+
+Request:
+{
+  "reason": "string"  // Alasan pembatalan
+}
+
+Response:
+{
+  "success": true,
+  "message": "Pembatalan driver berhasil",
+  "order": {
+    "id": "order_123",
+    "status": "driver_cancelled"
+  }
+}
+
+## Notes:
+1. Semua endpoint memerlukan JWT token untuk autentikasi
+2. Response time harus cepat untuk update lokasi real-time
+3. Data driver harus selalu up-to-date
+4. Perlu rate limiting untuk mencegah abuse
+5. Perlu error handling yang baik
+6. Perlu logging untuk tracking
+
+## Error Responses:
+{
+  "success": false,
+  "message": "Error message",
+  "errors": [
+    {
+      "field": "field_name",
+      "message": "error message"
+    }
+  ]
+}
+
+## Common Error Codes:
+- 400: Bad Request
+- 401: Unauthorized
+- 403: Forbidden
+- 404: Driver Not Found
+- 409: Driver Already Selected
+- 500: Internal Server Error 

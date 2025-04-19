@@ -1,0 +1,291 @@
+# Gatcor API Endpoints
+
+## 1. Order/Booking Endpoints
+
+### Create New Order
+POST /api/orders
+Request:
+{
+  "pickupLocation": string,
+  "destination": string,
+  "serviceId": string,
+  "paymentMethod": string,
+  "pickupLat": number,
+  "pickupLng": number,
+  "destLat": number,
+  "destLng": number
+}
+Response:
+{
+  "id": string,
+  "status": string,
+  "price": number,
+  "estimatedTime": number,
+  "distance": number,
+  "createdAt": string
+}
+
+### Get Order Status
+GET /api/orders/:orderId
+Response:
+{
+  "id": string,
+  "status": string,
+  "driver": {
+    "id": string,
+    "name": string,
+    "rating": number,
+    "vehicle": string,
+    "location": {
+      "lat": number,
+      "lng": number
+    }
+  },
+  "pickupLocation": string,
+  "destination": string,
+  "price": number,
+  "estimatedTime": number
+}
+
+### Cancel Order
+POST /api/orders/:orderId/cancel
+Response:
+{
+  "success": boolean,
+  "message": string
+}
+
+## 2. Driver Endpoints
+
+### Get Available Drivers
+GET /api/drivers/available
+Response:
+{
+  "drivers": [
+    {
+      "id": string,
+      "name": string,
+      "rating": number,
+      "vehicle": string,
+      "location": {
+        "lat": number,
+        "lng": number
+      }
+    }
+  ]
+}
+
+### Update Driver Location
+POST /api/drivers/:driverId/location
+Request:
+{
+  "lat": number,
+  "lng": number
+}
+Response:
+{
+  "success": boolean
+}
+
+## 3. Chat Endpoints
+
+### Send Message
+POST /api/orders/:orderId/chat
+Request:
+{
+  "message": string,
+  "sender": "user" | "driver"
+}
+Response:
+{
+  "id": string,
+  "message": string,
+  "sender": string,
+  "timestamp": string
+}
+
+### Get Chat History
+GET /api/orders/:orderId/chat
+Response:
+{
+  "messages": [
+    {
+      "id": string,
+      "message": string,
+      "sender": string,
+      "timestamp": string
+    }
+  ]
+}
+
+## 4. Rating & Review Endpoints
+
+### Submit Rating
+POST /api/orders/:orderId/rating
+Request:
+{
+  "overallRating": number,
+  "politenessRating": number,
+  "speedRating": number,
+  "cleanlinessRating": number,
+  "comment": string
+}
+Response:
+{
+  "success": boolean,
+  "message": string
+}
+
+### Get Driver Rating
+GET /api/drivers/:driverId/rating
+Response:
+{
+  "averageRating": number,
+  "totalRatings": number,
+  "reviews": [
+    {
+      "rating": number,
+      "comment": string,
+      "userName": string,
+      "date": string
+    }
+  ]
+}
+
+## 5. Trip History Endpoints
+
+### Get User Trip History
+GET /api/users/:userId/trips
+Response:
+{
+  "trips": [
+    {
+      "id": string,
+      "order": {
+        "pickupLocation": string,
+        "destination": string,
+        "price": number,
+        "date": string
+      },
+      "driver": {
+        "name": string,
+        "vehicle": string,
+        "rating": number
+      },
+      "rating": number,
+      "status": string
+    }
+  ]
+}
+
+### Get Trip Details
+GET /api/trips/:tripId
+Response:
+{
+  "id": string,
+  "order": {
+    "pickupLocation": string,
+    "destination": string,
+    "price": number,
+    "date": string,
+    "distance": number,
+    "duration": number
+  },
+  "driver": {
+    "name": string,
+    "vehicle": string,
+    "rating": number
+  },
+  "rating": number,
+  "status": string,
+  "route": {
+    "points": [
+      {
+        "lat": number,
+        "lng": number
+      }
+    ]
+  }
+}
+
+## 6. Emergency Endpoints
+
+### Send Emergency Call
+POST /api/orders/:orderId/emergency
+Request:
+{
+  "type": string, // "police", "ambulance", "fire"
+  "description": string
+}
+Response:
+{
+  "success": boolean,
+  "message": string,
+  "emergencyNumber": string
+}
+
+## 7. User Endpoints
+
+### Get User Profile
+GET /api/users/:userId
+Response:
+{
+  "id": string,
+  "name": string,
+  "email": string,
+  "phone": string,
+  "profilePicture": string,
+  "totalTrips": number,
+  "averageRating": number
+}
+
+### Update User Profile
+PUT /api/users/:userId
+Request:
+{
+  "name": string,
+  "email": string,
+  "phone": string,
+  "profilePicture": string
+}
+Response:
+{
+  "success": boolean,
+  "message": string
+}
+
+## 8. Payment Endpoints
+
+### Get Payment Methods
+GET /api/payment/methods
+Response:
+{
+  "methods": [
+    {
+      "id": string,
+      "name": string,
+      "icon": string
+    }
+  ]
+}
+
+### Process Payment
+POST /api/orders/:orderId/payment
+Request:
+{
+  "methodId": string,
+  "amount": number
+}
+Response:
+{
+  "success": boolean,
+  "transactionId": string,
+  "paymentUrl": string
+}
+
+## Notes:
+- All endpoints require JWT token authentication
+- Implement consistent error handling
+- Use uniform response format
+- Add rate limiting for security
+- Implement logging for monitoring 
